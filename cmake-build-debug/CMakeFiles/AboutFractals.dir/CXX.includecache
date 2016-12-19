@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/Edd/Documents/ProjetC++/Complex.cpp
+iostream
+-
+Complex.h
+/Users/Edd/Documents/ProjetC++/Complex.h
+cmath
+-
+
+/Users/Edd/Documents/ProjetC++/Complex.h
+
+/Users/Edd/Documents/ProjetC++/main.cpp
+Complex.h
+/Users/Edd/Documents/ProjetC++/Complex.h
+iostream
+-
+
