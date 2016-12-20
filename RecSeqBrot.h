@@ -18,7 +18,7 @@ private:
 
 public:
     RecSeqBrot() :RecSequence() {
-        Complex c();
+        c = Complex();
         nPower = 2;
     }
 
@@ -27,14 +27,32 @@ public:
         nPower = nPowerSource;
     }
 
-    void Next() {
-        for (int i = 1; i <= N; i++) {
-
-        }
+    RecSeqBrot(Complex& cSource, int nPowerSource) :RecSequence() {
+        c = cSource;
+        nPower = nPowerSource;
     }
 
-    bool IsConvergent() {
+    void Next() {
 
+        uCurrent = (uCurrent.Pow(nPower) + c);
+
+    }
+
+    int IsConvergent() {
+        int i = 1;
+        while ((uCurrent.GetRadius() < 2) && (i <= N)) {
+
+            this->Next();
+            i++;
+
+        }
+
+        if (i > N) {
+            return 0;
+        }
+        else {
+            return i;
+        }
     }
 };
 

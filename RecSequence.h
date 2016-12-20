@@ -21,6 +21,7 @@ public:
         uCurrent = u0;
         N = 10000;
     }
+
     RecSequence(Complex& u0Source, int NSource) {
         u0 = u0Source;
         uCurrent = u0;
@@ -28,7 +29,7 @@ public:
     }
 
     virtual void Next() = 0;
-    virtual bool IsConvergent() = 0;
+    virtual int IsConvergent() = 0;
 
 };
 

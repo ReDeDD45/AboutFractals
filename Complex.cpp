@@ -32,7 +32,12 @@ Complex Complex::FromCartesian(double r, double im)
 //Polar constructor
 Complex Complex::FromPolar(double radius, double angle)
 {
-    return Complex(radius*cos(angle), radius*sin(angle));
+    if (radius != 0){
+        return Complex(radius*cos(angle), radius*sin(angle));
+    }
+    else {
+        return Complex();
+    }
 }
 
 //Copy-Constructor
@@ -83,6 +88,25 @@ void Complex::SetImaginary(double newIm)
     _imaginary = newIm;
 }
 
+Complex Complex::Pow(const double& powerValue)
+{
+    double realResult, imResult, radiusResult, angleResult;
+
+    radiusResult = pow(this->GetRadius(),powerValue);
+
+    if (radiusResult == 0) {
+        return Complex();
+    }
+    else {
+        angleResult = powerValue * (this->GetAngle());
+
+        realResult = radiusResult*cos(angleResult);
+        imResult = radiusResult*sin(angleResult);
+
+        return Complex::FromCartesian(realResult, imResult);
+    }
+}
+
 // °°°°°°°°°°°°°°°°°°°  += & -= operators °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 void Complex::operator += (const Complex& cToAdd)
 {
@@ -105,7 +129,20 @@ void Complex::operator -= (const double& dToSubtract)
 {
     _real -= dToSubtract;
 }
-// °°°°°°°°°°°°°°°°°°°  += & -= operators °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+
+void Complex::operator = (const Complex& cSource)
+{
+    _real = cSource._real;
+    _imaginary = cSource._imaginary;
+}
+
+void Complex::operator = (const double& realSource)
+{
+    _real = realSource;
+    _imaginary = 0;
+}
+
+// °°°°°°°°°°°°°°°°°°°  += & -= & = operators °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 
 // °°°°°°°°°°°°°°°°°°° Display °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 void Complex::Display()
@@ -157,3 +194,25 @@ Complex operator - (const Complex& c1, const Complex& c2)
     result -= c2;
     return result;
 }
+
+Complex operator * (const double& real, Complex& cInput)
+{
+    double realResult, imResult;
+    realResult = real * cInput.GetReal();
+    imResult = real * cInput.GetImaginary();
+    return Complex::FromCartesian(realResult, imResult);
+}
+
+Complex operator * (Complex& cInput, const double& real)
+{
+    return real * cInput;
+}
+
+Complex operator * (Complex& cInput, Complex& cInput2)
+{
+    double realResult, imResult;
+    realResult = (cInput.GetReal() * cInput2.GetReal()) - (cInput.GetImaginary() * cInput2.GetImaginary());
+    imResult = (cInput.GetReal() * cInput2.GetImaginary()) + (cInput.GetImaginary() * cInput2.GetReal());
+    return Complex::FromCartesian(realResult, imResult);
+}
+

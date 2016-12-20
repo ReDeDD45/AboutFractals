@@ -23,12 +23,16 @@ public:
     const double GetAngle();
     void SetReal(double);
     void SetImaginary(double);
+    Complex Pow(const double&);   //Rise the complex to any power
 
     /* Public Operators */
     void operator += (const Complex&);
     void operator += (const double&);
     void operator -= (const Complex&);
     void operator -= (const double&);
+
+    void operator = (const Complex&);
+    void operator = (const double&);
 
     /* Display */
     void Display();
@@ -37,12 +41,13 @@ private:
     /* Fields */
     double _real;
     double _imaginary;
+
     /* Private Constructor */
     Complex(double, double);
 };
 
 
-//Non-Member functions - Operators
+//Non-Member functions -- Operators
 Complex operator + (const double&, const Complex&);
 Complex operator + (const Complex&, const double&);
 Complex operator + (const Complex&, const Complex&);
@@ -51,9 +56,9 @@ Complex operator - (const double&, const Complex&);
 Complex operator - (const Complex&, const double&);
 Complex operator - (const Complex&, const Complex&);
 
-Complex operator * (const double&, const Complex&);
-Complex operator * (const Complex&, const double&);
-Complex operator * (const Complex&, const Complex&);
+Complex operator * (const double&, Complex&);
+Complex operator * (Complex&, const double&);
+Complex operator * (Complex&, Complex&);
 
 
 #endif
